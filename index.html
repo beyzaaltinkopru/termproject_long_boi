@@ -170,6 +170,8 @@
     .visual-box p { text-align: justify; }
     .placeholder { background: rgba(255,255,255,0.05); border:2px dashed rgba(255,255,255,0.2); border-radius:8px; padding:40px; text-align:center; color: rgba(255,255,255,0.5); min-height:150px; display:flex; align-items:center; justify-content:center; margin-top:15px; }
     .placeholder-text { font-style:italic; }
+    .chart-img {max-width: 850px;width: 100%;height: auto;display: block;margin: 0 auto 20px auto;border-radius: 8px;}
+
 </style>
 </head>
 <body>
@@ -277,8 +279,8 @@ The daily view shows Citibike data as a literal heartbeat spiking and dropping w
             <div class="visual-box">
                 <h3>Secondary Factors Analysis</h3>
                 
-                <img src="nyc_urban_rhythm_events_traffic_noise_2024.png" alt="NYC Urban Rhythm Analysis" style="width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.3); margin-bottom: 20px;">
-                
+                <img src="nyc_urban_rhythm_events_traffic_noise_2024.png"class="chart-img"alt="NYC Urban Rhythm Analysis">
+
                 <p style="margin-top: 15px; color: rgba(255,255,255,0.85); line-height: 1.6; font-size: 15px; text-align: justify;">This visualization compares normalized traffic volume, noise complaints, and social event activity to capture New York City's broader urban rhythm across 2024. From January through July, both event frequency and noise complaints show a steady upward trend, reflecting the intensification of social activity and outdoor presence as the year progresses. Traffic volume follows a similar pattern, with noticeable increases particularly in April and June, suggesting periods of heightened mobility that align with seasonal transitions and event-driven movement. A visible gap during July and August highlights data scarcity rather than a true decline, underscoring the importance of contextualizing absences within the dataset. After October, all three indicators exhibit a general downturn, marking a collective slowdown in urban intensity as colder months approach. Together, these synchronized rises, plateaus, and declines illustrate how movement, social activity, and urban disturbance co-evolve over time, reinforcing the notion of a shared underlying city rhythm shaped by both behavioral and seasonal forces.</p>
             </div>
             <div class="visual-box">
