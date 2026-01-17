@@ -6,7 +6,7 @@
         position: relative;
         background: #0F2027;
         cursor: auto; /* Cursor visible */
-    }
+    } 
     /* Navbar */
     .navbar {
         position: fixed;
