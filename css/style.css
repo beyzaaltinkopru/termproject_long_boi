@@ -6,7 +6,7 @@
         position: relative;
         background: #0F2027;
         cursor: auto; /* Cursor visible */
-    } 
+    }
     /* Navbar */
     .navbar {
         position: fixed;
@@ -172,3 +172,66 @@
     border-radius: 8px;
 }
 
+/* CLICK ZOOM SYSTEM */
+
+.zoomable {
+    cursor: zoom-in;
+    transition: 
+        transform 0.35s ease,
+        box-shadow 0.35s ease;
+    z-index: 5;
+}
+
+.zoomable:hover {
+    transform: scale(1.05);
+}
+
+.zoomed {
+    transform: scale(1.35);
+    z-index: 999;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+    cursor: zoom-out;
+}
+/* Görsellerin tıklanabilir olduğundan emin olalım */
+.visual-box img.zoomable {
+    position: relative;
+    z-index: 5; /* Sayfa içeriğinin üstünde olmalı */
+    pointer-events: auto !important; /* Tıklamayı zorunlu kılar */
+    cursor: zoom-in;
+}
+
+.zoom-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85); /* Arka planı hafif şeffaf siyah yapar */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 99999; /* En üstte olmasını garanti eder */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    cursor: pointer; /* Kullanıcıya "tıklarsan kapanır" mesajı verir */
+}
+
+.zoom-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+#zoomedImg {
+    max-width: 85%;
+    max-height: 85%;
+    border-radius: 10px;
+    box-shadow: 0 0 50px rgba(0,0,0,1);
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+    cursor: default; /* Resmin üstünde imleç normal kalsın */
+}
+
+.zoom-overlay.active #zoomedImg {
+    transform: scale(1); /* Açılırken hafif büyüme efekti */
+}
