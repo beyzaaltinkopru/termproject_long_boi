@@ -6,14 +6,16 @@
 <title>Long Boi - NYC City Rhythm Project</title>
 <link rel="stylesheet" href="css/style.css">
 </head>
-<body> 
+<body>
     <div class="navbar">
-        <div class="logo">
-            <div class="logo-container">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYptgx8OdNYb-uNUfkV8khm1fgars6ro9WzA&s" alt="NYC City Rhythm Logo" class="logo-img">
-            </div>
-            <span>Long-boi</span>
-        </div>
+        <div class="logo" style="cursor: pointer;">
+    <div class="logo-container zoomable" onclick="showPage('home')">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYptgx8OdNYb-uNUfkV8khm1fgars6ro9WzA&s" alt="NYC City Rhythm Logo" class="logo-img">
+    </div>
+    <span onclick="showPage('home')">Long-boi</span>
+</div>
+    <span>Long-boi</span>
+</div>
         <div class="nav-buttons">
             <button class="nav-btn active" onclick="showPage('home')">Home</button>
             <button class="nav-btn" onclick="showPage('project-details')">Project Details</button>
@@ -99,18 +101,18 @@
             <div class="visual-box">
                 <h3>City Breathing Rhythm</h3>
                 
-                <img src="urban_trends_jan_jun_2024.png" alt="Urban Trends Normalized Graph">
+                <img src="urban_trends_jan_jun_2024.png" alt="Urban Trends Normalized Graph" class="zoomable">
 
                 <p style="margin-top: 15px; color: rgba(255,255,255,0.85); line-height: 1.6; font-size: 15px; text-align: justify;">To examine seasonal variations in NYC, Citi Bike ridership, traffic volume and electricity consumption were normalized to a common scale. The analysis reveals three distinct behavioral patterns operating independently. Citi Bike ridership exhibited a strong linear correlation with seasonal temperature progression, demonstrating predictable growth throughout the study period. In contrast, traffic volume showed significant volatility, with a pronounced peak in March followed by a sharp decline in April, indicating responsiveness to irregular external factors rather than seasonal trends. Electricity consumption maintained relatively stable patterns, with a notable February increase attributed to heating demand and subsequent stabilization until the onset of summer cooling requirements.</p>
                 
-                <img src="daily_mobility_pulse_jan_jun_2024.png" alt="Daily Mobility Pulse Graph">
+                <img src="daily_mobility_pulse_jan_jun_2024.png" alt="Daily Mobility Pulse Graph" class="zoomable">
                 <p style="margin-top: 15px; color: rgba(255,255,255,0.85); line-height: 1.6; font-size: 15px; text-align: justify;">Zooming into daily patterns, a critical question emerged: does this seasonal pulse hold at the day to day level?
 The daily view shows Citibike data as a literal heartbeat spiking and dropping with weekends and weather, growing stronger from January to June. Traffic, in contrast, shows massive irregular spikes like late March, proving it's driven by unpredictable events rather than daily patterns. Takeaway: micromobility is stable and plannable; traffic is fundamentally chaotic.</p>
             </div>
             <div class="visual-box">
                 <h3>Secondary Factors Analysis</h3>
                 
-                <img src="nyc_urban_rhythm_events_traffic_noise_2024.png"class="chart-img"alt="NYC Urban Rhythm Analysis">
+                <img src="nyc_urban_rhythm_events_traffic_noise_2024.png" class="chart-img zoomable" alt="NYC Urban Rhythm Analysis">
 
                 <p style="margin-top: 15px; color: rgba(255,255,255,0.85); line-height: 1.6; font-size: 15px; text-align: justify;">This urban rhythm analysis compares normalized traffic volume, noise complaints, and social event activity to capture New York City's broader urban rhythm across 2024. From January through July, both event frequency and noise complaints show a steady upward trend, reflecting the intensification of social activity and outdoor presence as the year progresses. Traffic volume follows a similar pattern, with noticeable increases particularly in April and June, suggesting periods of heightened mobility that align with seasonal transitions and event-driven movement. A visible gap during July and August highlights data scarcity rather than a true decline, underscoring the importance of contextualizing absences within the dataset. After October, all three indicators exhibit a general downturn, marking a collective slowdown in urban intensity as colder months approach. Together, these synchronized rises, plateaus, and declines illustrate how movement, social activity, and urban disturbance co-evolve over time, reinforcing the notion of a shared underlying city rhythm shaped by both behavioral and seasonal forces.</p>
             </div>
@@ -126,7 +128,7 @@ The daily view shows Citibike data as a literal heartbeat spiking and dropping w
             <div class="visual-box">
                 <h3>Regression</h3>
                 
-               <img src="image_3e5296.png" alt="Regression Analysis: Traffic vs Noise" style="width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.3); margin-bottom: 20px;">
+               <img src="image_3e5296.png" alt="Regression Analysis: Traffic vs Noise" style="width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.3); margin-bottom: 20px;"class="zoomable">
                 <p style="margin-top: 15px; color: rgba(255,255,255,0.85); line-height: 1.6; font-size: 15px; text-align: justify;">If traffic is this chaotic, what's its real impact on urban life? We tested the obvious assumption: more cars = more noise complaints. The regression revealed a weak link: R² = 0.042, meaning traffic explains just 4% of noise complaints. Despite the slight upward trend, data points scatter wildly low-traffic days still saw massive complaint spikes. The verdict: construction, parties, and neighbor disputes drive noise complaints far more than traffic does. Reducing cars alone won't solve the noise problem.</p>
             </div>
         </div>
@@ -188,6 +190,42 @@ The daily view shows Citibike data as a literal heartbeat spiking and dropping w
         requestAnimationFrame(animateDuck);
     }
     animateDuck();
+
+document.addEventListener('click', function (e) {
+    // 1. ZOOM AÇMA MANTIĞI
+    const target = e.target.closest('.zoomable');
+    if (target) {
+        const overlay = document.getElementById('zoomOverlay');
+        const zoomedImg = document.getElementById('zoomedImg');
+        
+        // Eğer tıklanan şeyin kendisi <img> değilse içindeki ilk <img>'yi bul
+        let imageSrc = '';
+        if (target.tagName === 'IMG') {
+            imageSrc = target.src;
+        } else {
+            const innerImg = target.querySelector('img');
+            if (innerImg) imageSrc = innerImg.src;
+        }
+
+        if (imageSrc) {
+            zoomedImg.src = imageSrc;
+            overlay.classList.add('active');
+            // Sayfa kaymasını engellemek için body'i kilitleyebiliriz (opsiyonel)
+            document.body.style.overflow = 'hidden';
+        }
+    }
+
+    // 2. ZOOM KAPATMA MANTIĞI (Siyah alana veya resme basınca geri dön)
+    const overlay = document.getElementById('zoomOverlay');
+    if (e.target.id === 'zoomOverlay' || e.target.id === 'zoomedImg') {
+        overlay.classList.remove('active');
+        document.body.style.overflow = 'auto'; // Kaydırmayı tekrar aç
+    }
+});
 </script>
+    <div id="zoomOverlay" class="zoom-overlay">
+    <img id="zoomedImg" src="" alt="Zoomed Image">
+</div>
+
 </body>
 </html>
