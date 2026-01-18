@@ -235,3 +235,29 @@
 .zoom-overlay.active #zoomedImg {
     transform: scale(1); /* Açılırken hafif büyüme efekti */
 }
+/* --- SADECE İÇERİK KUTULARI YAZI BOYUTU GÜNCELLEMESİ --- */
+
+/* 1. Sayfa Başlıkları (Örn: Project Details) */
+.page-header h1 { 
+    font-size: 38px !important; 
+}
+
+/* 2. Kutu Başlıkları (Örn: Project Motivation, Research Questions) */
+.box h2, .visual-box h3 { 
+    font-size: 26px !important; 
+}
+
+/* 3. Kutuların İçindeki Paragraflar ve Liste Elemanları */
+.box-content p, .box-content li, .visual-box p { 
+    font-size: 19px !important; /* Okunabilirliği artıran ana boyut */
+    line-height: 1.7 !important; /* Satırlar arası ferahlık */
+    text-align: justify;
+}
+
+/* 4. Listelerin hizalamasını korumak için */
+.box-content ul {
+    margin-top: 15px;
+}
+.box, .visual-box {
+    padding: 35px !important; /* İçerik ve kenar arasındaki boşluğu artırır */
+}
